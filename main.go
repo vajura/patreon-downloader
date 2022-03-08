@@ -28,6 +28,7 @@ type Config struct {
 	SecChUaPlatform string `json:"sec-ch-ua-platform"`
 	SecChUa         string `json:"sec-ch-ua"`
 	Cookie          string `json:"cookie"`
+	Interval        int    `json:"interval"`
 }
 
 func ReadConfig() Config {
@@ -76,7 +77,7 @@ func GetPatreonPostsFromMonth(config Config, month string) {
 						if err != nil {
 							fmt.Printf("%v\n", err)
 						}
-						time.Sleep(3 * time.Second)
+						time.Sleep(time.Duration(config.Interval) * time.Second)
 					} else {
 						fmt.Printf("SKIPPING: %v, already exists\n", fullFile)
 					}
